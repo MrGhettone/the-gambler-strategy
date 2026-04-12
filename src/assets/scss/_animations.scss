@@ -1,0 +1,19 @@
+// ========================================
+// ANIMATIONS & KEYFRAMES
+// ========================================
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+// Mixin for animations
+@mixin animation($name, $duration: 3s, $timing: ease-in-out, $iteration: infinite) {
+  animation: $name $duration $timing $iteration;
+}

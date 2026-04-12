@@ -1,5 +1,40 @@
+// ========================================
+// MAIN SCSS FILE - ALL IMPORTS
+// ========================================
+
 // Override variabili PRIMA di importare bootstrap
 $primary: #ff4d4f;
 
 @import "bootstrap/scss/bootstrap";
 @import 'bootstrap';
+
+// ========================================
+// PROJECT MODULES
+// ========================================
+
+// 1. Variables & Design Tokens
+@import './variables';
+
+// 2. Animations & Keyframes
+@import './animations';
+
+// 3. Buttons
+@import './buttons';
+
+// 4. Cards
+@import './cards';
+
+// 5. Hero Section
+@import './hero';
+
+// 6. About Section
+@import './about';
+
+// 7. Games Section
+@import './games';
+
+// 8. Key Points Section
+@import './keypoints';
+
+// 9. Responsive Design
+@import './responsive';

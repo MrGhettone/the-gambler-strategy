@@ -1,0 +1,51 @@
+// ========================================
+// RESPONSIVE & MEDIA QUERIES
+// ========================================
+
+@media (max-width: $breakpoint-mobile) {
+  // Hero Section
+  .hero {
+    grid-template-columns: 1fr;
+    padding: $spacing-2xl $spacing-md;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+  }
+
+  .hero-visual {
+    height: 250px;
+  }
+
+  .floating-icon {
+    font-size: 8rem;
+  }
+
+  // Sections
+  .about,
+  .games,
+  .key-points {
+    padding: $spacing-2xl $spacing-md;
+  }
+
+  .about-content h2,
+  .games h2,
+  .key-points h2 {
+    font-size: 1.8rem;
+  }
+
+  // Games Grid
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Home View
+  .home-view {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}

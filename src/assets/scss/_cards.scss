@@ -1,0 +1,55 @@
+// ========================================
+// CARD STYLES
+// ========================================
+
+// Mixin for card styling
+@mixin card-base() {
+  background: $white;
+  border-radius: $radius-md;
+  padding: $spacing-xl;
+  box-shadow: $shadow-md;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+// About Card
+.about-card {
+  @include card-base();
+  text-align: center;
+  background: $white;
+  box-shadow: $shadow-md;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Game Card
+.game-card {
+  background: $light-gray;
+  border-radius: $radius-md;
+  padding: $spacing-xl;
+  border: 2px solid $light-border;
+  transition: all $transition-fast;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: $primary-color;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+    transform: translateY(-5px);
+  }
+}
+
+// Point Card
+.point {
+  background: $white;
+  padding: $spacing-xl;
+  border-radius: $radius-md;
+  text-align: center;
+  box-shadow: $shadow-sm;
+}

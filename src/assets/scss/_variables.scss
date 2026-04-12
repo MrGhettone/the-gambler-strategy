@@ -1,0 +1,60 @@
+// ========================================
+// VARIABLES & DESIGN TOKENS
+// ========================================
+
+// Primary Colors
+$primary-gradient-start: #667eea;
+$primary-gradient-end: #764ba2;
+$primary-color: $primary-gradient-start;
+
+// Neutral Colors
+$white: #ffffff;
+$light-gray: #f8f9fa;
+$light-border: #e9ecef;
+$text-dark: #333333;
+$text-gray: #666666;
+$text-muted: #999999;
+
+// Spacing
+$spacing-xs: 0.4rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$spacing-4xl: 6rem;
+
+// Font Sizes
+$font-size-xs: 0.95rem;
+$font-size-sm: 1.1rem;
+$font-size-md: 1.3rem;
+$font-size-lg: 1.5rem;
+$font-size-xl: 2.5rem;
+$font-size-2xl: 3.5rem;
+
+// Border Radius
+$radius-sm: 8px;
+$radius-md: 15px;
+
+// Shadows
+$shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.2);
+$shadow-primary: 0 8px 20px rgba(102, 126, 234, 0.3);
+
+// Transitions
+$transition-fast: 0.3s ease;
+$transition-smooth: 0.4s ease;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// Z-index
+$z-base: 1;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-fixed: 30;
+$z-modal: 40;

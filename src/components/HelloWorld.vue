@@ -1,9 +1,14 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'HelloWorld',
+  props: {
+    msg: {
+      type: String,
+      required: true
+    }
+  }
 })
 </script>
 

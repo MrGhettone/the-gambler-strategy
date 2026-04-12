@@ -1,3 +1,11 @@
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'WelcomeItem'
+})
+</script>
+
 <template>
   <div class="item">
     <i>
