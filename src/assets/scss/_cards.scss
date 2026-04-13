@@ -1,55 +1,81 @@
 // ========================================
-// CARD STYLES
+// CARD STYLES — Casino Theme
 // ========================================
 
-// Mixin for card styling
 @mixin card-base() {
-  background: $white;
-  border-radius: $radius-md;
+  background: $casino-surface;
+  border-radius: $radius-sm;
   padding: $spacing-xl;
-  box-shadow: $shadow-md;
-  transition: transform $transition-fast;
+  @include gold-border-card;
+  transition: transform $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    border-color: rgba(201, 162, 39, 0.55);
+    box-shadow: $shadow-gold;
   }
 }
 
-// About Card
+// About Card (home page)
 .about-card {
   @include card-base();
   text-align: center;
-  background: $white;
-  box-shadow: $shadow-md;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-lg;
+  .about-icon {
+    font-size: 2.8rem;
+    margin-bottom: $spacing-md;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.3));
+  }
+
+  h3 {
+    font-size: $font-size-md;
+    margin-bottom: $spacing-sm;
+    color: $casino-gold;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  p {
+    color: $casino-ivory;
+    line-height: 1.65;
+    font-size: $font-size-xs;
   }
 }
 
-// Game Card
+// Game Card (home page grid)
 .game-card {
-  background: $light-gray;
-  border-radius: $radius-md;
+  background: $casino-surface;
+  border-radius: $radius-sm;
   padding: $spacing-xl;
-  border: 2px solid $light-border;
+  @include gold-border-card;
   transition: all $transition-fast;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  // Decorativo angolo superiore
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: linear-gradient(225deg, rgba(201, 162, 39, 0.12) 0%, transparent 70%);
+    border-bottom-left-radius: 40px;
+  }
 
   &:hover {
-    border-color: $primary-color;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
-    transform: translateY(-5px);
+    border-color: $casino-border-hover;
+    box-shadow: $shadow-gold;
+    transform: translateY(-6px);
   }
 }
 
 // Point Card
 .point {
-  background: $white;
+  background: $casino-surface;
   padding: $spacing-xl;
-  border-radius: $radius-md;
+  border-radius: $radius-sm;
   text-align: center;
-  box-shadow: $shadow-sm;
+  @include gold-border-card;
 }

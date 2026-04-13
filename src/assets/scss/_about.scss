@@ -1,16 +1,16 @@
 // ========================================
-// ABOUT SECTION STYLES
+// ABOUT SECTION (Home Page) — Casino Theme
 // ========================================
 
 .about {
   padding: $spacing-4xl $spacing-xl;
-  background: $light-gray;
+  @include felt-surface(#0a1e12);
 
   h2 {
     font-size: $font-size-xl;
     margin-bottom: $spacing-2xl;
     text-align: center;
-    color: $text-dark;
+    @include gold-text;
   }
 }
 
@@ -19,7 +19,7 @@
     font-size: $font-size-xl;
     margin-bottom: $spacing-2xl;
     text-align: center;
-    color: $text-dark;
+    @include gold-text;
   }
 }
 
@@ -27,35 +27,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: $spacing-xl;
-}
-
-.about-card {
-  background: $white;
-  padding: $spacing-xl;
-  border-radius: $radius-md;
-  text-align: center;
-  box-shadow: $shadow-md;
-  transition: transform $transition-fast;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-
-  .about-icon {
-    font-size: 3rem;
-    margin-bottom: $spacing-md;
-    display: block;
-  }
-
-  h3 {
-    font-size: $font-size-md;
-    margin-bottom: $spacing-md;
-    color: $primary-color;
-  }
-
-  p {
-    color: $text-gray;
-    line-height: 1.6;
-    font-size: $font-size-xs;
-  }
+  max-width: 1100px;
+  margin: 0 auto;
 }

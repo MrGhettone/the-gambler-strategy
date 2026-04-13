@@ -1,32 +1,53 @@
 // ========================================
-// ABOUT VIEW PAGE STYLES
+// ABOUT VIEW PAGE — Casino Theme
 // ========================================
 
 .about-view {
   width: 100%;
 
+  // ── Hero ────────────────────────────────
   .about-hero {
     padding: $spacing-4xl $spacing-xl;
-    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
-    color: $white;
+    @include felt-surface(#0d2318);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '♠ ♥ ♦ ♣';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      color: rgba(201, 162, 39, 0.04);
+      letter-spacing: 2rem;
+      pointer-events: none;
+      white-space: nowrap;
+    }
 
     h1 {
       font-size: $font-size-2xl;
       font-weight: 800;
       margin-bottom: $spacing-md;
       line-height: 1.2;
+      position: relative;
+      @include gold-text;
     }
 
     .hero-subtitle {
       font-size: $font-size-md;
-      opacity: 0.95;
+      color: $casino-ivory;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      position: relative;
     }
   }
 
+  // ── Content ─────────────────────────────
   .about-content {
     padding: $spacing-3xl $spacing-xl;
-    background: $white;
+    @include felt-surface($casino-bg);
   }
 
   .content-wrapper {
@@ -39,19 +60,32 @@
 
     h2 {
       font-size: 2rem;
-      color: $text-dark;
       margin-bottom: $spacing-lg;
-      border-bottom: 3px solid $primary-gradient-start;
       padding-bottom: $spacing-sm;
+      border-bottom: 1px solid $casino-border;
+      position: relative;
+      @include gold-text;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background: $casino-gold;
+        box-shadow: 0 0 8px $casino-gold-glow;
+      }
     }
 
     p {
       font-size: $font-size-xs;
-      line-height: 1.8;
-      color: $text-gray;
+      line-height: 1.85;
+      color: $casino-ivory;
     }
   }
 
+  // ── Features list ────────────────────────
   .features-list {
     list-style: none;
     padding: 0;
@@ -59,88 +93,99 @@
 
     li {
       padding: $spacing-md 0;
-      font-size: 1.05rem;
-      color: $text-gray;
-      border-bottom: 1px solid #eee;
+      font-size: 1.02rem;
+      color: $casino-ivory;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
       display: flex;
       align-items: center;
       gap: $spacing-md;
 
-      &:last-child {
-        border-bottom: none;
-      }
+      &:last-child { border-bottom: none; }
 
       .icon {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         min-width: 30px;
+        text-align: center;
+        filter: drop-shadow(0 0 6px rgba(201, 162, 39, 0.3));
       }
     }
   }
 
+  // ── Principles grid ──────────────────────
   .principles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: $spacing-xl;
     margin-top: $spacing-xl;
   }
 
   .principle-card {
-    background: $light-gray;
+    background: $casino-surface;
     padding: $spacing-xl;
-    border-radius: $radius-md;
+    border-radius: $radius-sm;
     text-align: center;
-    box-shadow: $shadow-md;
-    transition: transform $transition-fast;
+    @include gold-border-card;
+    transition: transform $transition-fast, box-shadow $transition-fast;
 
     &:hover {
       transform: translateY(-5px);
+      box-shadow: $shadow-gold;
     }
 
     .principle-icon {
-      font-size: 3rem;
+      font-size: 2.8rem;
       margin-bottom: $spacing-md;
       display: block;
+      filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.25));
     }
 
     h3 {
       font-size: $font-size-md;
-      color: $primary-gradient-start;
-      margin-bottom: 0.8rem;
+      color: $casino-gold;
+      margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', Georgia, serif;
     }
 
     p {
       font-size: $font-size-xs;
+      color: $casino-ivory;
       margin: 0;
+      line-height: 1.6;
     }
   }
 
+  // ── Warning box ──────────────────────────
   .important-note {
-    background: linear-gradient(135deg, #fff5f5 0%, #fff0f5 100%);
+    background: rgba(155, 27, 48, 0.08);
     padding: $spacing-xl;
-    border-radius: $radius-md;
-    border-left: 5px solid #ff6b6b;
+    border-radius: $radius-sm;
+    border: 1px solid rgba(155, 27, 48, 0.3);
+    border-left: 4px solid $casino-crimson;
 
     h2 {
-      color: #d32f2f;
-      border-bottom-color: #ff6b6b;
+      color: $casino-crimson-hi !important;
+      -webkit-text-fill-color: $casino-crimson-hi !important;
+      background: none;
+
+      &::after { background: $casino-crimson; }
     }
 
     .warning-text {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       line-height: 1.8;
-      color: #c00;
+      color: #e8a0aa;
       font-weight: 500;
     }
 
     .resources {
       margin-top: $spacing-lg;
       padding-top: $spacing-lg;
-      border-top: 2px solid #ffb3b3;
+      border-top: 1px solid rgba(155, 27, 48, 0.25);
 
       p {
-        font-weight: 600;
-        color: $text-dark;
-        margin-bottom: 0.8rem;
+        font-weight: 700;
+        color: $casino-ivory;
+        margin-bottom: 0.75rem;
       }
 
       ul {
@@ -150,9 +195,10 @@
 
         li {
           padding: $spacing-sm 0;
-          padding-left: $spacing-lg;
+          padding-left: 1.8rem;
           position: relative;
-          color: $text-gray;
+          color: $casino-muted;
+          font-size: $font-size-xs;
 
           &::before {
             content: '📞';
@@ -164,29 +210,17 @@
     }
   }
 
+  // ── Responsive ───────────────────────────
   @media (max-width: $breakpoint-mobile) {
     .about-hero {
       padding: $spacing-2xl $spacing-md;
 
-      h1 {
-        font-size: 2rem;
-      }
-
-      .hero-subtitle {
-        font-size: $font-size-xs;
-      }
+      h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: $font-size-xs; }
     }
 
-    .about-content {
-      padding: $spacing-xl $spacing-md;
-    }
-
-    .content-section h2 {
-      font-size: 1.5rem;
-    }
-
-    .principles-grid {
-      grid-template-columns: 1fr;
-    }
+    .about-content { padding: $spacing-xl $spacing-md; }
+    .content-section h2 { font-size: 1.5rem; }
+    .principles-grid { grid-template-columns: 1fr; }
   }
 }

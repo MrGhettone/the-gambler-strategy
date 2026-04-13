@@ -1,63 +1,84 @@
 // ========================================
-// BUTTON STYLES
+// BUTTONS — Casino Theme
 // ========================================
 
-// CTA Button
 .cta-button {
-  padding: $spacing-md $spacing-xl;
+  padding: $spacing-md $spacing-2xl;
   font-size: $font-size-sm;
-  background: $white;
-  color: $primary-color;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, $casino-gold-hi 0%, $casino-gold 50%, $casino-gold-dim 100%);
+  color: $casino-bg-deep;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   transition: all $transition-fast;
-  box-shadow: $shadow-xl;
+  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  // Shimmer effect
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s ease;
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #f0d060 0%, $casino-gold-hi 50%, $casino-gold 100%);
+
+    &::after { left: 150%; }
   }
 
-  &:active {
-    transform: translateY(0);
-  }
+  &:active { transform: translateY(0); }
 }
 
-// Game Button
 .game-button {
-  background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
-  color: $white;
+  background: linear-gradient(135deg, $casino-gold 0%, $casino-gold-dim 100%);
+  color: $casino-bg-deep;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: $radius-sm;
+  padding: 0.8rem 1.6rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   transition: all $transition-fast;
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.2);
 
   &:hover {
-    transform: scale(1.05);
-    box-shadow: $shadow-primary;
+    transform: translateY(-2px);
+    box-shadow: $shadow-gold;
+    background: linear-gradient(135deg, $casino-gold-hi 0%, $casino-gold 100%);
   }
 
-  &:active {
-    transform: scale(1);
-  }
+  &:active { transform: translateY(0); }
 }
 
-// Mixin for buttons
 @mixin button-base() {
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   transition: all $transition-fast;
   display: inline-block;
   text-align: center;
   text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }

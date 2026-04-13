@@ -1,21 +1,48 @@
 // ========================================
-// VARIABLES & DESIGN TOKENS
+// CASINO DESIGN TOKENS
 // ========================================
 
-// Primary Colors
-$primary-gradient-start: #667eea;
-$primary-gradient-end: #764ba2;
-$primary-color: $primary-gradient-start;
+// ── Dark Backgrounds ─────────────────────
+$casino-bg-deep:    #05100a;
+$casino-bg:         #08140c;
+$casino-felt:       #0d2318;
+$casino-felt-mid:   #122e1e;
+$casino-surface:    #183828;
+$casino-surface-hi: #1f4532;
 
-// Neutral Colors
-$white: #ffffff;
-$light-gray: #f8f9fa;
-$light-border: #e9ecef;
-$text-dark: #333333;
-$text-gray: #666666;
-$text-muted: #999999;
+// ── Gold Palette ─────────────────────────
+$casino-gold:       #c9a227;
+$casino-gold-hi:    #e8c84a;
+$casino-gold-dim:   #9a7a18;
+$casino-gold-pale:  rgba(201, 162, 39, 0.12);
+$casino-gold-glow:  rgba(201, 162, 39, 0.35);
 
-// Spacing
+// ── Accent ───────────────────────────────
+$casino-crimson:    #9b1b30;
+$casino-crimson-hi: #c0243c;
+
+// ── Text ─────────────────────────────────
+$casino-cream:      #f5f0e1;
+$casino-ivory:      #d4c59a;
+$casino-muted:      #8a7a5a;
+
+// ── Borders ──────────────────────────────
+$casino-border:       rgba(201, 162, 39, 0.22);
+$casino-border-hover: rgba(201, 162, 39, 0.7);
+
+// ── Legacy aliases ────────────────────────
+// Mantengono la compatibilità con i partial esistenti
+$primary-gradient-start: $casino-gold;
+$primary-gradient-end:   $casino-gold-dim;
+$primary-color:           $casino-gold;
+$white:                   #ffffff;
+$light-gray:              $casino-surface;
+$light-border:            $casino-border;
+$text-dark:               $casino-cream;
+$text-gray:               $casino-ivory;
+$text-muted:              $casino-muted;
+
+// ── Spacing ──────────────────────────────
 $spacing-xs: 0.4rem;
 $spacing-sm: 0.5rem;
 $spacing-md: 1rem;
@@ -25,7 +52,7 @@ $spacing-2xl: 3rem;
 $spacing-3xl: 4rem;
 $spacing-4xl: 6rem;
 
-// Font Sizes
+// ── Font Sizes ───────────────────────────
 $font-size-xs: 0.95rem;
 $font-size-sm: 1.1rem;
 $font-size-md: 1.3rem;
@@ -33,28 +60,29 @@ $font-size-lg: 1.5rem;
 $font-size-xl: 2.5rem;
 $font-size-2xl: 3.5rem;
 
-// Border Radius
+// ── Radius ───────────────────────────────
 $radius-sm: 8px;
 $radius-md: 15px;
 
-// Shadows
-$shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
-$shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.2);
-$shadow-primary: 0 8px 20px rgba(102, 126, 234, 0.3);
+// ── Shadows ──────────────────────────────
+$shadow-sm:      0 4px 15px rgba(0, 0, 0, 0.4);
+$shadow-md:      0 6px 24px rgba(0, 0, 0, 0.55);
+$shadow-lg:      0 12px 40px rgba(0, 0, 0, 0.6);
+$shadow-xl:      0 16px 50px rgba(0, 0, 0, 0.7);
+$shadow-primary: 0 0 25px rgba(201, 162, 39, 0.35);
+$shadow-gold:    0 0 20px rgba(201, 162, 39, 0.4), 0 8px 30px rgba(0, 0, 0, 0.6);
 
-// Transitions
-$transition-fast: 0.3s ease;
+// ── Transitions ──────────────────────────
+$transition-fast:   0.3s ease;
 $transition-smooth: 0.4s ease;
 
-// Breakpoints
+// ── Breakpoints ──────────────────────────
 $breakpoint-mobile: 768px;
 $breakpoint-tablet: 1024px;
 
-// Z-index
-$z-base: 1;
+// ── Z-index ──────────────────────────────
+$z-base:     1;
 $z-dropdown: 10;
-$z-sticky: 20;
-$z-fixed: 30;
-$z-modal: 40;
+$z-sticky:   20;
+$z-fixed:    30;
+$z-modal:    40;

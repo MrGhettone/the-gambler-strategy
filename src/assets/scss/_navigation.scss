@@ -1,14 +1,17 @@
 // ========================================
-// NAVIGATION STYLES
+// NAVIGATION — Casino Theme
 // ========================================
 
 .navbar {
-  background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
-  padding: 1rem 0;
-  box-shadow: $shadow-md;
+  background: #04090600;
+  background: linear-gradient(180deg, #030a06 0%, #060e09 100%);
+  padding: 0.85rem 0;
   position: sticky;
   top: 0;
   z-index: $z-fixed;
+  border-bottom: 1px solid $casino-border;
+  box-shadow: 0 2px 0 rgba(201, 162, 39, 0.15),
+              0 4px 30px rgba(0, 0, 0, 0.7);
 }
 
 .navbar-container {
@@ -20,31 +23,29 @@
   align-items: center;
 }
 
+// ── Logo ─────────────────────────────────
+
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.75rem;
   text-decoration: none;
-  font-size: $font-size-lg;
+  font-size: 1.4rem;
   font-weight: 800;
-  color: $white;
+  font-family: 'Playfair Display', Georgia, serif;
   transition: opacity $transition-fast;
 
-  &:hover {
-    opacity: 0.9;
-  }
+  &:hover { opacity: 0.85; }
 }
 
-.logo-icon {
-  font-size: 2rem;
-}
+.logo-icon { font-size: 1.9rem; }
 
 .logo-text {
-  background: linear-gradient(135deg, $white 0%, #f0f0f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  @include gold-text;
+  letter-spacing: 0.02em;
 }
+
+// ── Nav menu ─────────────────────────────
 
 .nav-menu {
   display: flex;
@@ -55,51 +56,58 @@
   align-items: center;
 }
 
-.nav-item {
-  position: relative;
-}
+.nav-item { position: relative; }
 
 .nav-link {
-  color: $white;
+  color: $casino-ivory;
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   padding: $spacing-sm $spacing-md;
-  transition: all $transition-fast;
+  transition: color $transition-fast;
   position: relative;
 
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 2px;
-    background: $white;
+    background: linear-gradient(90deg, $casino-gold, $casino-gold-hi);
     transition: width $transition-fast;
+    box-shadow: 0 0 8px $casino-gold-glow;
   }
 
-  &:hover::after {
-    width: 100%;
+  &:hover {
+    color: $casino-gold-hi;
+    &::after { width: 100%; }
   }
 
   &.nav-link-contact {
-    background: rgba(255, 255, 255, 0.2);
+    background: transparent;
+    border: 1px solid $casino-border;
     border-radius: 25px;
     padding: $spacing-sm $spacing-lg;
+    color: $casino-gold;
+    transition: all $transition-fast;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: $casino-gold-pale;
+      border-color: $casino-border-hover;
+      color: $casino-gold-hi;
+      box-shadow: 0 0 15px $casino-gold-glow;
 
-      &::after {
-        display: none;
-      }
+      &::after { display: none; }
     }
   }
 }
 
-// ----------------------------------------
-// Dropdown Giochi
-// ----------------------------------------
+// ── Dropdown Giochi ──────────────────────
+
+.nav-item--dropdown { position: relative; }
 
 .nav-link--dropdown-trigger {
   background: none;
@@ -111,28 +119,30 @@
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  color: $white;
+  color: $casino-ivory;
 }
 
 .dropdown-arrow {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   transition: transform $transition-fast;
   display: inline-block;
+  color: $casino-gold;
 }
 
 .dropdown-menu {
-  // Bootstrap imposta display:none su questa classe — lo sovrascriviamo
-  // esplicitamente: il menu è sempre nel DOM, la visibilità è gestita
-  // tramite opacity + visibility per permettere le transizioni CSS.
+  // Bootstrap imposta display:none — lo sovrascriviamo
   display: block;
   position: absolute;
   top: 100%;
   left: 50%;
-  background: $white;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-  min-width: 190px;
-  padding: $spacing-sm 0;
+  background: linear-gradient(180deg, #0c1c12 0%, #081008 100%);
+  border: 1px solid $casino-border;
+  border-radius: $radius-sm;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8),
+              0 0 0 1px rgba(201, 162, 39, 0.08),
+              inset 0 1px 0 rgba(201, 162, 39, 0.1);
+  min-width: 200px;
+  padding: 0.4rem 0;
   list-style: none;
   margin: 0;
   opacity: 0;
@@ -149,25 +159,29 @@
     transform: translateX(-50%);
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-bottom: 7px solid $white;
+    border-bottom: 7px solid rgba(201, 162, 39, 0.3);
   }
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 1.2rem;
-  color: $text-dark;
+  gap: 0.65rem;
+  padding: 0.65rem 1.2rem;
+  color: $casino-ivory;
   text-decoration: none;
   font-weight: 600;
-  font-size: $font-size-xs;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   transition: background $transition-fast, color $transition-fast;
   white-space: nowrap;
+  border-left: 2px solid transparent;
 
   &:hover {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
-    color: $primary-gradient-start;
+    background: $casino-gold-pale;
+    color: $casino-gold-hi;
+    border-left-color: $casino-gold;
   }
 
   .dropdown-item-icon {
@@ -177,15 +191,10 @@
   }
 }
 
-// ----------------------------------------
-// Desktop hover — CSS puro, no JS events
-// ----------------------------------------
+// ── Desktop hover — CSS puro ─────────────
 
 @media (min-width: 769px) {
   .nav-item--dropdown {
-    // ::after crea un ponte invisibile tra bottone e dropdown.
-    // position:absolute → non influenza l'altezza del flex item
-    // → nessun disallineamento nel navbar.
     &::after {
       content: '';
       position: absolute;
@@ -205,11 +214,13 @@
   .nav-item--dropdown:hover .dropdown-arrow {
     transform: rotate(180deg);
   }
+
+  .nav-item--dropdown:hover .nav-link--dropdown-trigger {
+    color: $casino-gold-hi;
+  }
 }
 
-// ----------------------------------------
-// Hamburger (Mobile)
-// ----------------------------------------
+// ── Hamburger ────────────────────────────
 
 .hamburger {
   display: none;
@@ -219,99 +230,79 @@
 
   span {
     width: 25px;
-    height: 3px;
-    background: $white;
-    border-radius: 3px;
+    height: 2px;
+    background: linear-gradient(90deg, $casino-gold, $casino-gold-hi);
+    border-radius: 2px;
     transition: all $transition-fast;
+    box-shadow: 0 0 6px $casino-gold-glow;
   }
 
   &.active {
-    span:nth-child(1) {
-      transform: rotate(45deg) translate(8px, 8px);
-    }
-
-    span:nth-child(2) {
-      opacity: 0;
-    }
-
-    span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
+    span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
   }
 }
 
-// ----------------------------------------
-// Mobile Responsive
-// ----------------------------------------
+// ── Mobile ───────────────────────────────
 
 @media (max-width: $breakpoint-mobile) {
-  .navbar-container {
-    padding: 0 $spacing-md;
-  }
+  .navbar-container { padding: 0 $spacing-md; }
 
-  .hamburger {
-    display: flex;
-  }
+  .hamburger { display: flex; }
 
   .nav-menu {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+    background: linear-gradient(180deg, #080e09 0%, #04090600 0%, #06100a 100%);
+    background: #07120a;
+    border-top: 1px solid $casino-border;
+    border-bottom: 1px solid $casino-border;
     flex-direction: column;
     gap: 0;
-    padding: $spacing-md 0;
+    padding: $spacing-sm 0;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease;
 
-    &.active {
-      max-height: 600px;
-    }
+    &.active { max-height: 600px; }
   }
 
-  .nav-item {
-    width: 100%;
-  }
+  .nav-item { width: 100%; }
 
   .nav-link {
     display: flex;
-    padding: $spacing-md $spacing-xl;
+    padding: 0.9rem $spacing-xl;
     width: 100%;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 
-    &::after {
-      display: none;
-    }
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+    &::after { display: none; }
+    &:hover { background: $casino-gold-pale; color: $casino-gold-hi; }
 
     &.nav-link-contact {
-      background: rgba(255, 255, 255, 0.2);
+      background: transparent;
       border-radius: 0;
-      padding: $spacing-md $spacing-xl;
+      border: none;
+      border-top: 1px solid $casino-border;
+      padding: 0.9rem $spacing-xl;
+      margin-top: 0.3rem;
     }
   }
 
   .nav-item--dropdown {
     flex-direction: column;
     align-items: flex-start;
-
-    &::after {
-      display: none;
-    }
+    &::after { display: none; }
   }
 
   .nav-link--dropdown-trigger {
     width: 100%;
-    padding: $spacing-md $spacing-xl;
+    padding: 0.9rem $spacing-xl;
     justify-content: space-between;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+    &:hover { background: $casino-gold-pale; color: $casino-gold-hi; }
   }
 
   .dropdown-menu {
@@ -319,7 +310,9 @@
     transform: none;
     box-shadow: none;
     border-radius: 0;
-    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-top: 1px solid rgba(201, 162, 39, 0.1);
+    background: rgba(0, 0, 0, 0.3);
     width: 100%;
     max-height: 0;
     overflow: hidden;
@@ -328,24 +321,17 @@
     visibility: visible;
     transition: max-height 0.3s ease, padding 0.3s ease;
 
-    &.open {
-      max-height: 400px;
-      padding: 0.4rem 0;
-    }
-
-    &::before {
-      display: none;
-    }
+    &.open { max-height: 400px; padding: 0.3rem 0; }
+    &::before { display: none; }
   }
 
   .dropdown-item {
-    color: $white;
-    padding: 0.7rem $spacing-xl 0.7rem 2.5rem;
-    font-size: 0.9rem;
+    color: $casino-ivory;
+    padding: 0.7rem $spacing-xl 0.7rem 2.8rem;
+    font-size: 0.82rem;
+    border-left: none;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.06);
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: $white;
-    }
+    &:hover { background: $casino-gold-pale; color: $casino-gold-hi; }
   }
 }

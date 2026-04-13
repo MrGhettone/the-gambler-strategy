@@ -1,5 +1,5 @@
 // ========================================
-// HERO SECTION STYLES
+// HERO SECTION — Casino Theme
 // ========================================
 
 .hero {
@@ -8,29 +8,59 @@
   gap: $spacing-3xl;
   align-items: center;
   padding: $spacing-4xl $spacing-xl;
-  background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
-  color: $white;
   position: relative;
+  overflow: hidden;
+  @include felt-surface(#0d2318);
+
+  // Decorazione semi delle carte in background
+  &::before {
+    content: '♠ ♥ ♦ ♣';
+    position: absolute;
+    top: 8%;
+    right: 4%;
+    font-size: 3.5rem;
+    color: rgba(201, 162, 39, 0.07);
+    letter-spacing: 0.8rem;
+    pointer-events: none;
+    animation: suit-drift 8s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '♣ ♦ ♥ ♠';
+    position: absolute;
+    bottom: 8%;
+    left: 4%;
+    font-size: 2.5rem;
+    color: rgba(155, 27, 48, 0.06);
+    letter-spacing: 0.6rem;
+    pointer-events: none;
+    animation: suit-drift 10s ease-in-out infinite reverse;
+  }
 
   h1 {
     font-size: $font-size-2xl;
     font-weight: 800;
     margin-bottom: $spacing-md;
-    line-height: 1.2;
+    line-height: 1.15;
+    @include gold-text;
+    text-shadow: none;
   }
 
   .subtitle {
     font-size: $font-size-lg;
     margin-bottom: $spacing-lg;
-    opacity: 0.95;
+    color: $casino-ivory;
     font-weight: 600;
+    letter-spacing: 0.03em;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
   }
 
   .hero-description {
     font-size: $font-size-sm;
     margin-bottom: $spacing-xl;
-    line-height: 1.6;
-    opacity: 0.9;
+    line-height: 1.75;
+    color: $casino-muted;
   }
 }
 
@@ -43,6 +73,8 @@
 }
 
 .floating-icon {
-  font-size: 15rem;
-  @include animation(float, 3s, ease-in-out, infinite);
+  font-size: 14rem;
+  filter: drop-shadow(0 0 50px rgba(201, 162, 39, 0.3))
+          drop-shadow(0 0 15px rgba(201, 162, 39, 0.15));
+  @include animation(float, 3.5s, ease-in-out, infinite);
 }

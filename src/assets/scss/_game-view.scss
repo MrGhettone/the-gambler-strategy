@@ -1,25 +1,38 @@
 // ========================================
-// GAME VIEW PAGE STYLES
+// GAME VIEW PAGE — Casino Theme
 // ========================================
-
-@keyframes float-game {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
-}
 
 .game-view {
   width: 100%;
 
+  // ── Hero ────────────────────────────────
   .game-hero {
     padding: 5rem $spacing-xl;
-    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
-    color: $white;
+    @include felt-surface(#0d2318);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '♠ ♥ ♦ ♣';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 9rem;
+      color: rgba(201, 162, 39, 0.04);
+      letter-spacing: 2.5rem;
+      pointer-events: none;
+      white-space: nowrap;
+    }
 
     .game-icon-large {
       font-size: 5rem;
       margin-bottom: $spacing-md;
       display: block;
+      position: relative;
+      filter: drop-shadow(0 0 30px rgba(201, 162, 39, 0.4))
+              drop-shadow(0 0 8px rgba(201, 162, 39, 0.2));
       animation: float-game 3s ease-in-out infinite;
     }
 
@@ -27,138 +40,169 @@
       font-size: 3rem;
       font-weight: 800;
       margin-bottom: $spacing-md;
+      position: relative;
+      @include gold-text;
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
-      opacity: 0.9;
+      font-size: 1.15rem;
+      color: $casino-ivory;
       max-width: 600px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.65;
+      position: relative;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
     }
   }
 
+  // ── Intro ───────────────────────────────
   .game-intro {
     padding: $spacing-2xl $spacing-xl;
-    background: $white;
+    @include felt-surface($casino-bg);
+    border-top: 1px solid $casino-border;
 
     .content-wrapper {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
     .intro-text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: $text-gray;
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: $casino-ivory;
       text-align: center;
+      font-style: italic;
     }
   }
 
+  // ── Strategies ──────────────────────────
   .game-strategies {
     padding: $spacing-2xl $spacing-xl $spacing-4xl;
-    background: $light-gray;
+    @include felt-surface($casino-felt);
+    border-top: 1px solid $casino-border;
 
     .content-wrapper {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     h2 {
       font-size: 2rem;
-      color: $text-dark;
       margin-bottom: 2.5rem;
       text-align: center;
-      border-bottom: 3px solid $primary-gradient-start;
       padding-bottom: 0.8rem;
+      position: relative;
+      @include gold-text;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, $casino-gold, transparent);
+      }
     }
   }
 
   .strategies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: $spacing-xl;
   }
 
   .strategy-card {
-    background: $white;
-    border-radius: $radius-md;
+    background: $casino-surface;
+    border-radius: $radius-sm;
     padding: $spacing-xl;
-    box-shadow: $shadow-md;
-    transition: transform $transition-fast;
+    @include gold-border-card;
+    transition: transform $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
+    position: relative;
+    overflow: hidden;
+
+    // Corner accent
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(180deg, $casino-gold, transparent);
+      transition: height 0.4s ease;
+    }
 
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+      border-color: rgba(201, 162, 39, 0.55);
+      box-shadow: $shadow-gold;
+
+      &::before { height: 100%; }
     }
 
     .strategy-icon {
       font-size: 2.5rem;
       margin-bottom: $spacing-md;
       display: block;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.2));
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: $primary-gradient-start;
-      margin-bottom: 0.8rem;
+      color: $casino-gold;
+      margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 0.02em;
     }
 
     p {
       font-size: $font-size-xs;
-      line-height: 1.7;
-      color: $text-gray;
+      line-height: 1.75;
+      color: $casino-ivory;
       margin: 0;
     }
   }
 
+  // ── Warning ─────────────────────────────
   .game-warning {
-    padding: $spacing-xl;
-    background: linear-gradient(135deg, #fff5f5 0%, #fff0f5 100%);
-    border-top: 4px solid #ff6b6b;
+    padding: $spacing-xl $spacing-xl;
+    background: rgba(155, 27, 48, 0.07);
+    border-top: 1px solid rgba(155, 27, 48, 0.3);
     text-align: center;
 
-    p {
+    .content-wrapper {
       max-width: 700px;
       margin: 0 auto;
+    }
+
+    p {
       font-size: $font-size-xs;
-      color: #c00;
+      color: #d08090;
       font-weight: 500;
-      line-height: 1.6;
+      line-height: 1.7;
     }
   }
 
+  // ── Responsive ───────────────────────────
   @media (max-width: $breakpoint-mobile) {
     .game-hero {
       padding: $spacing-2xl $spacing-md;
 
-      .game-icon-large {
-        font-size: 3.5rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .hero-subtitle {
-        font-size: $font-size-xs;
-      }
+      .game-icon-large { font-size: 3.5rem; }
+      h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: $font-size-xs; }
     }
 
-    .game-intro {
-      padding: $spacing-xl $spacing-md;
-    }
+    .game-intro { padding: $spacing-xl $spacing-md; }
 
     .game-strategies {
       padding: $spacing-xl $spacing-md $spacing-2xl;
-
-      h2 {
-        font-size: 1.5rem;
-      }
+      h2 { font-size: 1.5rem; }
     }
 
-    .strategies-grid {
-      grid-template-columns: 1fr;
-    }
+    .strategies-grid { grid-template-columns: 1fr; }
   }
 }
