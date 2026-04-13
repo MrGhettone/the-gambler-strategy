@@ -1,0 +1,351 @@
+// ========================================
+// NAVIGATION STYLES
+// ========================================
+
+.navbar {
+  background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+  padding: 1rem 0;
+  box-shadow: $shadow-md;
+  position: sticky;
+  top: 0;
+  z-index: $z-fixed;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-xl;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  font-size: $font-size-lg;
+  font-weight: 800;
+  color: $white;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.logo-icon {
+  font-size: 2rem;
+}
+
+.logo-text {
+  background: linear-gradient(135deg, $white 0%, #f0f0f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  color: $white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: $spacing-sm $spacing-md;
+  transition: all $transition-fast;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: $white;
+    transition: width $transition-fast;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  &.nav-link-contact {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: $spacing-sm $spacing-lg;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+// ----------------------------------------
+// Dropdown Giochi
+// ----------------------------------------
+
+.nav-link--dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: $white;
+}
+
+.dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform $transition-fast;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  // Bootstrap imposta display:none su questa classe — lo sovrascriviamo
+  // esplicitamente: il menu è sempre nel DOM, la visibilità è gestita
+  // tramite opacity + visibility per permettere le transizioni CSS.
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  background: $white;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  min-width: 190px;
+  padding: $spacing-sm 0;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  z-index: $z-modal;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid $white;
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  color: $text-dark;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: $font-size-xs;
+  transition: background $transition-fast, color $transition-fast;
+  white-space: nowrap;
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+    color: $primary-gradient-start;
+  }
+
+  .dropdown-item-icon {
+    font-size: 1.1rem;
+    min-width: 22px;
+    text-align: center;
+  }
+}
+
+// ----------------------------------------
+// Desktop hover — CSS puro, no JS events
+// ----------------------------------------
+
+@media (min-width: 769px) {
+  .nav-item--dropdown {
+    // ::after crea un ponte invisibile tra bottone e dropdown.
+    // position:absolute → non influenza l'altezza del flex item
+    // → nessun disallineamento nel navbar.
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 0.7rem;
+    }
+  }
+
+  .nav-item--dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-item--dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+// ----------------------------------------
+// Hamburger (Mobile)
+// ----------------------------------------
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: $spacing-xs;
+
+  span {
+    width: 25px;
+    height: 3px;
+    background: $white;
+    border-radius: 3px;
+    transition: all $transition-fast;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+  }
+}
+
+// ----------------------------------------
+// Mobile Responsive
+// ----------------------------------------
+
+@media (max-width: $breakpoint-mobile) {
+  .navbar-container {
+    padding: 0 $spacing-md;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+    flex-direction: column;
+    gap: 0;
+    padding: $spacing-md 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+
+    &.active {
+      max-height: 600px;
+    }
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: flex;
+    padding: $spacing-md $spacing-xl;
+    width: 100%;
+
+    &::after {
+      display: none;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.nav-link-contact {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      padding: $spacing-md $spacing-xl;
+    }
+  }
+
+  .nav-item--dropdown {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .nav-link--dropdown-trigger {
+    width: 100%;
+    padding: $spacing-md $spacing-xl;
+    justify-content: space-between;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+
+    &.open {
+      max-height: 400px;
+      padding: 0.4rem 0;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .dropdown-item {
+    color: $white;
+    padding: 0.7rem $spacing-xl 0.7rem 2.5rem;
+    font-size: 0.9rem;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $white;
+    }
+  }
+}

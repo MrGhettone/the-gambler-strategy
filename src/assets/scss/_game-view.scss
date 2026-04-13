@@ -1,0 +1,164 @@
+// ========================================
+// GAME VIEW PAGE STYLES
+// ========================================
+
+@keyframes float-game {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.game-view {
+  width: 100%;
+
+  .game-hero {
+    padding: 5rem $spacing-xl;
+    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+    color: $white;
+    text-align: center;
+
+    .game-icon-large {
+      font-size: 5rem;
+      margin-bottom: $spacing-md;
+      display: block;
+      animation: float-game 3s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: $spacing-md;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .game-intro {
+    padding: $spacing-2xl $spacing-xl;
+    background: $white;
+
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: $text-gray;
+      text-align: center;
+    }
+  }
+
+  .game-strategies {
+    padding: $spacing-2xl $spacing-xl $spacing-4xl;
+    background: $light-gray;
+
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: $text-dark;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      border-bottom: 3px solid $primary-gradient-start;
+      padding-bottom: 0.8rem;
+    }
+  }
+
+  .strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: $spacing-xl;
+  }
+
+  .strategy-card {
+    background: $white;
+    border-radius: $radius-md;
+    padding: $spacing-xl;
+    box-shadow: $shadow-md;
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .strategy-icon {
+      font-size: 2.5rem;
+      margin-bottom: $spacing-md;
+      display: block;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $primary-gradient-start;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      font-size: $font-size-xs;
+      line-height: 1.7;
+      color: $text-gray;
+      margin: 0;
+    }
+  }
+
+  .game-warning {
+    padding: $spacing-xl;
+    background: linear-gradient(135deg, #fff5f5 0%, #fff0f5 100%);
+    border-top: 4px solid #ff6b6b;
+    text-align: center;
+
+    p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: $font-size-xs;
+      color: #c00;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    .game-hero {
+      padding: $spacing-2xl $spacing-md;
+
+      .game-icon-large {
+        font-size: 3.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: $font-size-xs;
+      }
+    }
+
+    .game-intro {
+      padding: $spacing-xl $spacing-md;
+    }
+
+    .game-strategies {
+      padding: $spacing-xl $spacing-md $spacing-2xl;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .strategies-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
