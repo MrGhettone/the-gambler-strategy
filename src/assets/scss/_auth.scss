@@ -1,0 +1,558 @@
+// ========================================
+// AUTH & DASHBOARD — Casino Theme
+// ========================================
+
+// ── Shared auth layout ───────────────────
+
+.auth-view {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl $spacing-md;
+  @include felt-surface($casino-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: $casino-felt;
+  @include gold-border-card;
+  border-radius: $radius-md;
+  padding: $spacing-2xl;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $casino-gold, transparent);
+  }
+
+  &--center { text-align: center; }
+}
+
+.auth-suits {
+  font-size: 1.4rem;
+  letter-spacing: 0.6rem;
+  color: rgba(201, 162, 39, 0.25);
+  text-align: center;
+  margin-bottom: $spacing-lg;
+}
+
+.auth-title {
+  font-size: 2rem;
+  margin-bottom: $spacing-sm;
+  @include gold-text;
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: $font-size-xs;
+  color: $casino-ivory;
+  text-align: center;
+  line-height: 1.7;
+  margin-bottom: $spacing-xl;
+
+  strong.auth-email {
+    color: $casino-gold;
+    font-weight: 700;
+  }
+}
+
+// ── Form ─────────────────────────────────
+
+.auth-form { display: flex; flex-direction: column; gap: $spacing-md; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $casino-gold;
+}
+
+.form-input {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid $casino-border;
+  border-radius: $radius-sm;
+  padding: 0.85rem 1rem;
+  color: $casino-cream;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+  outline: none;
+
+  &::placeholder { color: $casino-muted; }
+
+  &:focus {
+    border-color: $casino-border-hover;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+  }
+}
+
+.form-error {
+  font-size: 0.88rem;
+  color: $casino-crimson-hi;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(155, 27, 48, 0.12);
+  border: 1px solid rgba(155, 27, 48, 0.3);
+  border-radius: $radius-sm;
+}
+
+// ── Buttons ──────────────────────────────
+
+.auth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  margin-top: $spacing-sm;
+  background: linear-gradient(135deg, $casino-gold-hi 0%, $casino-gold 50%, $casino-gold-dim 100%);
+  color: $casino-bg-deep;
+  border: none;
+  border-radius: $radius-sm;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.25);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.45);
+    background: linear-gradient(135deg, #f0d060 0%, $casino-gold-hi 50%, $casino-gold 100%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  &--inline {
+    width: auto;
+    display: inline-flex;
+    margin-top: 0;
+  }
+}
+
+// ── Spinner ──────────────────────────────
+
+.btn-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top-color: $casino-bg-deep;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.auth-spinner-large {
+  width: 52px; height: 52px;
+  border: 3px solid $casino-border;
+  border-top-color: $casino-gold;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto $spacing-xl;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Steps (email sent page) ───────────────
+
+.auth-icon-large {
+  font-size: 4rem;
+  margin-bottom: $spacing-lg;
+  display: block;
+  text-align: center;
+}
+
+.auth-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  text-align: left;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    color: $casino-ivory;
+    font-size: $font-size-xs;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: $radius-sm;
+    border-left: 2px solid $casino-border;
+  }
+}
+
+.step-num {
+  min-width: 28px; height: 28px;
+  background: linear-gradient(135deg, $casino-gold, $casino-gold-dim);
+  color: $casino-bg-deep;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+// ── Notes & links ────────────────────────
+
+.auth-note {
+  font-size: 0.85rem;
+  color: $casino-muted;
+  text-align: center;
+  margin-top: $spacing-lg;
+  line-height: 1.6;
+}
+
+.auth-link {
+  color: $casino-gold;
+  text-decoration: none;
+  font-weight: 600;
+  &:hover { color: $casino-gold-hi; text-decoration: underline; }
+}
+
+// ========================================
+// DASHBOARD
+// ========================================
+
+.dashboard-view {
+  min-height: calc(100vh - 70px);
+  @include felt-surface($casino-bg);
+}
+
+.dashboard-hero {
+  padding: $spacing-2xl $spacing-xl;
+  @include felt-surface(#0d2318);
+  border-bottom: 1px solid $casino-border;
+}
+
+.dashboard-hero-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+}
+
+.dashboard-avatar {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, $casino-gold, $casino-gold-dim);
+  color: $casino-bg-deep;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'Playfair Display', Georgia, serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+}
+
+.dashboard-hero-content h1 {
+  font-size: 2rem;
+  @include gold-text;
+}
+
+.dashboard-email {
+  color: $casino-ivory;
+  font-size: $font-size-xs;
+  margin-top: 0.2rem;
+}
+
+.badge-admin {
+  margin-left: auto;
+  padding: 0.3rem 0.9rem;
+  background: linear-gradient(135deg, $casino-gold, $casino-gold-dim);
+  color: $casino-bg-deep;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.35);
+}
+
+.dashboard-content {
+  padding: $spacing-2xl $spacing-xl;
+}
+
+.dashboard-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+}
+
+.dashboard-section {
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $casino-border;
+    @include gold-text;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 50px; height: 2px;
+      background: $casino-gold;
+    }
+  }
+
+  &--admin {
+    background: rgba(201, 162, 39, 0.05);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    border-radius: $radius-md;
+    padding: $spacing-xl;
+  }
+}
+
+.admin-note {
+  color: $casino-ivory;
+  font-size: $font-size-xs;
+  line-height: 1.7;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: $spacing-md;
+}
+
+.info-card {
+  background: $casino-surface;
+  border-radius: $radius-sm;
+  padding: $spacing-md $spacing-lg;
+  @include gold-border-card;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $casino-muted;
+  font-weight: 700;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: $casino-cream;
+  font-weight: 600;
+
+  &--role { font-weight: 700; }
+}
+
+.role-admin { color: $casino-gold; }
+.role-user  { color: $casino-ivory; }
+
+.empty-state {
+  background: $casino-surface;
+  border-radius: $radius-md;
+  @include gold-border-card;
+  padding: $spacing-2xl;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+
+  .empty-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.2));
+  }
+
+  p { color: $casino-ivory; font-size: $font-size-xs; }
+}
+
+.logout-button {
+  align-self: flex-start;
+  padding: 0.7rem 1.6rem;
+  background: transparent;
+  border: 1px solid rgba(155, 27, 48, 0.4);
+  border-radius: $radius-sm;
+  color: #d08090;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(155, 27, 48, 0.12);
+    border-color: $casino-crimson-hi;
+    color: $casino-crimson-hi;
+  }
+}
+
+// ========================================
+// NAVBAR — user avatar & dropdown
+// ========================================
+
+.nav-item--user { position: relative; }
+
+.nav-user-trigger {
+  background: none;
+  border: 1px solid $casino-border;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem 0.25rem 0.25rem;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $casino-border-hover;
+    background: $casino-gold-pale;
+    box-shadow: 0 0 12px $casino-gold-glow;
+  }
+}
+
+.nav-avatar {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, $casino-gold, $casino-gold-dim);
+  color: $casino-bg-deep;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu--right {
+  left: auto;
+  right: 0;
+  transform: translateY(-6px);
+
+  &.open { transform: translateY(0); }
+  &::before { left: auto; right: 18px; }
+}
+
+.dropdown-user-info {
+  padding: 0.6rem 1.2rem 0.5rem;
+  border-bottom: 1px solid $casino-border;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.dropdown-user-email {
+  font-size: 0.8rem;
+  color: $casino-muted;
+  word-break: break-all;
+}
+
+.dropdown-badge-admin {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $casino-gold;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid $casino-border;
+  border-radius: 10px;
+  padding: 0.1rem 0.5rem;
+  align-self: flex-start;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: $casino-border;
+  margin: 0.3rem 0;
+}
+
+.dropdown-item--logout {
+  background: none;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+  cursor: pointer;
+  color: #d08090;
+
+  &:hover {
+    background: rgba(155, 27, 48, 0.1);
+    color: $casino-crimson-hi;
+    border-left-color: $casino-crimson;
+  }
+}
+
+// ── Desktop hover for user dropdown ──────
+
+@media (min-width: 769px) {
+  .nav-item--user {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      height: 0.7rem;
+    }
+
+    &:hover .dropdown-menu--right {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    &:hover .nav-user-trigger {
+      border-color: $casino-border-hover;
+      background: $casino-gold-pale;
+    }
+  }
+}
+
+// ── Responsive ───────────────────────────
+
+@media (max-width: $breakpoint-mobile) {
+  .dashboard-hero { padding: $spacing-xl $spacing-md; }
+  .dashboard-hero-content { flex-direction: column; align-items: flex-start; gap: $spacing-md; }
+  .dashboard-content { padding: $spacing-xl $spacing-md; }
+  .badge-admin { margin-left: 0; }
+  .info-grid { grid-template-columns: 1fr; }
+  .logout-button { align-self: stretch; text-align: center; }
+
+  .nav-item--user { width: 100%; }
+  .nav-user-trigger {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid $casino-border;
+    padding: 0.9rem $spacing-xl;
+    justify-content: space-between;
+    &:hover { background: $casino-gold-pale; }
+  }
+  .nav-avatar { width: 26px; height: 26px; font-size: 0.8rem; }
+
+  .dropdown-menu--right {
+    left: 0; right: 0;
+    transform: none;
+    &.open { transform: none; }
+    &::before { display: none; }
+  }
+}
