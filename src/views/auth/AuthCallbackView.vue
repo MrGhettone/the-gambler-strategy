@@ -9,43 +9,60 @@ export default defineComponent({
     const error = ref(null)
 
     onMounted(async () => {
-      // Supabase JS v2: con magic link il token arriva come
-      // fragment (#access_token=...) oppure come code PKCE (?code=...).
-      // getSession() lo processa automaticamente da entrambi i formati.
-      const { data: { session }, error: err } = await supabase.auth.getSession()
+      // Supabase JS v2 PKCE flow: il magic link reindirizza con ?code=...
+      // Bisogna chiamare esplicitamente exchangeCodeForSession per ottenere la sessione.
+      const params = new URLSearchParams(window.location.search)
+      const code = params.get('code')
 
-      if (err) {
-        error.value = err.message
+      if (code) {
+        const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+        if (exchangeError) {
+          error.value = exchangeError.message
+          return
+        }
+        if (data?.session) {
+          authStore.user = data.session.user
+          await authStore._loadProfile()
+          window.location.replace('/dashboard')
+          return
+        }
+      }
+
+      // Fallback per il flusso implicito (#access_token=...) o sessione già presente
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+
+      if (sessionError) {
+        error.value = sessionError.message
         return
       }
 
       if (session) {
         authStore.user = session.user
         await authStore._loadProfile()
-        window.location.href = '/dashboard'
+        window.location.replace('/dashboard')
         return
       }
 
-      // Fallback: aspetta l'evento SIGNED_IN se la sessione non è ancora pronta
+      // Ultimo fallback: aspetta l'evento SIGNED_IN
+      let redirected = false
       const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        if (redirected) return
         if (event === 'SIGNED_IN' && session) {
+          redirected = true
           subscription.unsubscribe()
           authStore.user = session.user
           await authStore._loadProfile()
-          window.location.href = '/dashboard'
-        }
-        if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
-          subscription.unsubscribe()
-          error.value = 'Link non valido o scaduto.'
+          window.location.replace('/dashboard')
         }
       })
 
-      // Timeout di sicurezza: dopo 8 secondi mostra errore
+      // Timeout di sicurezza: dopo 10 secondi mostra errore
       setTimeout(() => {
         if (!authStore.isLoggedIn) {
+          subscription.unsubscribe()
           error.value = 'Link scaduto o già utilizzato. Richiedi un nuovo link.'
         }
-      }, 8000)
+      }, 10000)
     })
 
     return { error }

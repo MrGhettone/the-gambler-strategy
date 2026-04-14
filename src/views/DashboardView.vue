@@ -49,7 +49,9 @@ export default defineComponent({
             <div class="info-card">
               <span class="info-label">Membro dal</span>
               <span class="info-value">
-                {{ new Date(authStore.profile?.created_at).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' }) }}
+                {{ authStore.profile?.created_at
+                  ? new Date(authStore.profile.created_at).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })
+                  : '—' }}
               </span>
             </div>
           </div>
