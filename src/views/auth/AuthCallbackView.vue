@@ -9,26 +9,10 @@ export default defineComponent({
     const error = ref(null)
 
     onMounted(async () => {
-      // Supabase JS v2 PKCE flow: il magic link reindirizza con ?code=...
-      // Bisogna chiamare esplicitamente exchangeCodeForSession per ottenere la sessione.
-      const params = new URLSearchParams(window.location.search)
-      const code = params.get('code')
+      // Con flowType: 'implicit', Supabase legge automaticamente il token
+      // dall'hash (#access_token=...) quando la pagina carica.
+      // getSession() è sufficiente per ottenere la sessione già pronta.
 
-      if (code) {
-        const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
-        if (exchangeError) {
-          error.value = exchangeError.message
-          return
-        }
-        if (data?.session) {
-          authStore.user = data.session.user
-          await authStore._loadProfile()
-          window.location.replace('/dashboard')
-          return
-        }
-      }
-
-      // Fallback per il flusso implicito (#access_token=...) o sessione già presente
       const { data: { session }, error: sessionError } = await supabase.auth.getSession()
 
       if (sessionError) {
@@ -43,7 +27,7 @@ export default defineComponent({
         return
       }
 
-      // Ultimo fallback: aspetta l'evento SIGNED_IN
+      // Fallback: aspetta l'evento SIGNED_IN (detectSessionInUrl processa async)
       let redirected = false
       const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
         if (redirected) return
@@ -56,7 +40,6 @@ export default defineComponent({
         }
       })
 
-      // Timeout di sicurezza: dopo 10 secondi mostra errore
       setTimeout(() => {
         if (!authStore.isLoggedIn) {
           subscription.unsubscribe()
